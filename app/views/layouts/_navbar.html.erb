@@ -1,0 +1,78 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <%=link_to "Alpha blog", root_path, class: "navbar-brand", id: "logo"%>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <%=link_to "Home", root_path, class: "nav-link"%>
+      </li>
+      <li class="nav-item">
+        <%= link_to "Articles", articles_path, class: "nav-link"%>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Actions
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <%if logged_in?%>
+          <%= link_to "New Artilce", new_article_path, class: "dropdown-item"%>
+        <%end%>
+          <a class="dropdown-item" href="#"><%=link_to "All Users", users_path, class: "dropdown-item"%></a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+
+
+      <!-- beginning of catagories section-->
+      <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Catagories
+      </a>
+      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+      <%if logged_in? && current_user.admin?%>
+        <%= link_to "create new category", new_category_path, class: "dropdown-item"%>
+      <%end%>
+        <a class="dropdown-item" href="#"><%=link_to "Categories", categories_path, class: "dropdown-item"%></a>
+      </div>
+    </li>
+
+
+      <!-- end of catagories section-->
+  
+      <% if logged_in? %>
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <%=link_to 'Logout', logout_path, method:  :delete, class: "nav-link"%>
+          </li>
+          <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <%="Admin" if current_user.admin?%> <%=current_user.username%>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <%= link_to "View Profile", user_path(current_user), class: "dropdown-item"%>
+          <%= link_to "Edit Profile", edit_user_path(current_user), class: "dropdown-item"%>
+          <%= link_to "Delete Profile", user_path(current_user), class: "dropdown-item text-danger", method: :delete, data: {confirm: "Are you SURE?"}%>
+        </div>
+      </li> <!-- end of dropdown-->
+        </ul>
+        <%else%>
+        <li class="nav-item">
+           <%= link_to "log in", login_path, class: "nav-link"%>
+        </li>
+        <li class="nav-item">
+        <%= link_to "Sign up", signup_path, class: "nav-link"%>
+     </li>
+      <% end %>
+      
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+   
+  </div>
+</nav>
