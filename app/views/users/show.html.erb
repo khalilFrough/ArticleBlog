@@ -5,6 +5,12 @@
     </div>
 </div>    
 
+<% if logged_in? && @user== current_user%>
+    <div class="text-center mt-4">
+        <%=link_to "edit your profile", edit_user_path(@user), class: "btn btn-outlin"%>
+    </div>
+<% end %>
+
 <h6 align="center"> <%= @user.username%>'s Articles<h6>
 <div class="pagination-wrapper">
     <%= will_paginate @user_articles%>
