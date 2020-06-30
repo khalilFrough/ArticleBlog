@@ -18,8 +18,19 @@
                 <div class="col-sm-2 col-form-label">
                     <%= f.label :description%>
                 </div>
-                <div class="col-sm-8">
+                <div class="col-sm-8 shadow rounded">
                      <%= f.text_area :description, class: "form-control", rows:10, placeholder: "Body of Artilce", autuofocus:true%>
+                <div>
+            </div>
+            <br>
+
+            <div class="form-group row">
+                <div class="col-sm-2 col-form-label">
+                    <%= f.label :category%>
+                </div>
+                <div class="col-sm-8">
+                    <%= f.collection_select(:category_ids, Category.all, :id, :name, {prompt: "Make a selection from List Below(can be emty)"},
+                    {multiple:true,class: "custom-select shadow rounded"}) %>
                 <div>
             </div>
             <br>
